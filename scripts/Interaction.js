@@ -83,6 +83,7 @@ function closeRating() {
     document.getElementById("ratings").style.width = "0px";
 }
 function populateRatings(JSONObj) {
+    console.log("RATINGS " +JSONObj  + JSONObj.Name)
     var name = document.getElementById("NameR");
     var location = document.getElementById("LocationR");
     var description = document.getElementById("DescriptionR");
