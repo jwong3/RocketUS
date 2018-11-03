@@ -6,43 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <script src="scripts/table.js"></script>
-    <script src="scripts/Interaction.js"></script>
-    <script src="scripts/RequestToServer.js"></script>
+  <script src="scripts/Interaction.js"></script>
+  <script src="scripts/RequestToServer.js"></script>
 </head>
+
 <body>
-<div class="header">
+  <div class="header">
     <h1>Crack-n-Secure DownTown</h1>
-    <table id="result" style="width:100%">
-      <tr id="labels">
-        <th align="left" onclick="sortTable('0')">Name</th>
-        <th onclick="sortTable('1')">Location</th>
-        <th onclick="sortTable('2')">Description</th>
-        <th onclick="sortTable('3')">Type</th>
-        <th onclick="sortTable('4')">Place Safety</th>
-        <th onclick="sortTable('5')">Location Safety</th>
-      </tr>
-    </table>
+  </div>
+  <table id="result" style="width:100%">
+    <tr id="labels">
+      <th align="left" onclick="sortTable('0')">Name</th>
+      <th onclick="sortTable('1')">Location</th>
+      <th onclick="sortTable('2')">Description</th>
+      <th onclick="sortTable('3')">Type</th>
+      <th onclick="sortTable('4')">Place Safety</th>
+      <th onclick="sortTable('5')">Location Safety</th>
+    </tr>
+  </table>
 
-    <panel id="thepanel">
-        <hbox align="start">
-            <image src="warning.png"/>
-            <vbox>
-                <description value="You have 6 new messages."/>
-                <hbox>
-                    <button label="Read Mail"/>
-                    <button label="New Message"/>
-                </hbox>
-            </vbox>
+  <panel id="thepanel">
+    <hbox align="start">
+      <image src="warning.png" />
+      <vbox>
+        <description value="You have 6 new messages." />
+        <hbox>
+          <button label="Read Mail" />
+          <button label="New Message" />
         </hbox>
-    </panel>
-    <description value="6 New Messages" popup="thepanel"/>
-</div>
-
+      </vbox>
+    </hbox>
+  </panel>
+  <description value="6 New Messages" popup="thepanel" />
+  <div class="footer">
+    <button onclick="window.open('/info.html', '_self')"> Information</button>
+  </div>
 </body>
 <script>
-    var panel = document.getElementById("thepanel");
-    panel.openPopup();
-    getData();
+  var panel = document.getElementById("thepanel");
+  panel.openPopup();
+  getData();
 </script>
 
 </html>
