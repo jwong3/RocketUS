@@ -18,6 +18,7 @@ addRequest.onload = function () {
 
 editRequest.onload = function () {
     if (this.readyState === 4 && this.status === 200) {
+        console.log(this.responseText);
         getData();
     }
 };
@@ -98,5 +99,7 @@ function displayData(data) {
             `<tr id="${data[i].ID}" ondblclick="getItemInfo('${data[i].ID}')"><td>${data[i].Name}</td><td>${data[i].Location}</td><td>${data[i].Description}</td><td>${data[i].Type}</td><td>${data[i].PlaceSafe}</td><td>${data[i].SurroundingSafe}</td><td><button onclick ="getItemInfoRating('${data[i].ID}');">AddRating</button> </td></tr>`;
         tableToPopulate.innerHTML += template;
     }
+
+    console.log("Done displaying");
 }
 
