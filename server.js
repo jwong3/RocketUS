@@ -70,6 +70,15 @@ var server = http.createServer(function (req, res) {
         returnOneRow(body, res);
       });
       break;
+    case '/editRating':
+      var body = '';
+      req.on('data', function (data) {
+        body += data;
+      });
+      req.on('end', function () {
+        editRating(body, res);
+      });
+      break;
     default:
       res.end('404 not found');
   }
@@ -119,45 +128,64 @@ function EditDB(body, res) {
 }
 
 function editRating(body, res) {
+  console.log("Edit Rating")
   body = JSON.parse(body);
-  let average = averageRating(body);
-  db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, average.averageP, average.averageS, function (err) {
-    if (err) {
-      return console.error(err.message);
-    }
-    console.log(`Row(s) updated: ${this.changes}`);
-  });
-  res.writeHead(
-    200,
-    { 'Content-type': 'text/html' }
-  );
-  res.end('post recieved');
+  let average = averageRating(body, res);
+  /*
+  */
 }
 
-function averageRating(body) {
-  var sqlget = "SELECT * FROM ratings WHERE ID = ? ";
-  var curr;
-  db.run(sqlget, body.ID, function (err, row) {
+function averageRating(body, res) {
+  console.log("Update Rating" + body.ID + body.PlaceSafe)
+  var car =[];
+  var ID = body.ID;
+  db.each("SELECT * FROM ratings", function (err, row) {
     if (err) {
       return console.error(err.message);
     }
-    curr = row;
-  });
-  curr.SumP += body.PlaceSafe;
-  curr.TotalP++;
-  curr.SumS += body.SurroundingSafe;
-  curr.TotalS++;
-  var sqleditRating = 'UPDATE ratings SET ID = ?, Name = ?, SumP = ?, TotalP = ?, SumS = ?, TotalS = ?,WHERE ID = ?';
-  db.run(sqleditRating, curr.ID, curr.Name, curr.SumP, curr.TotalP, curr.SumS, curr.TotalS, function (err) {
-    if (err) {
-      return console.error(err.message);
+    console.log("Row" + row)
+    car.push(row);
+  }, function () {
+    console.log("CAR" + car.length)
+    let temp;
+    for (let i = 0; i < car.length; i++) {
+      if (car[i].ID == ID) {
+        temp = car[i];
+      }
     }
-  });
-  let averageP = curr.SumP / curr.TotalP;
-  let averageS = curr.SumS / curr.TotalS;
 
-  return averageP, averageS;
-
+    let curr = temp;
+    console.log("Update " + curr)
+    curr.SumP = curr.SumP + parseInt(body.PlaceSafe);
+    curr.TotalP++;
+    curr.SumS = parseInt(curr.SumS) + parseInt(body.SurroundingSafe);
+    curr.TotalS++;
+    console.log(curr.SumS);
+    var sqleditRating = 'UPDATE ratings SET SumP = ?, TotalP = ?, SumS = ?, TotalS = ? WHERE ID = ?';
+    db.run(sqleditRating,  curr.SumP, curr.TotalP, curr.SumS, curr.TotalS, ID, function (err) {
+      if (err) {
+        return console.error(err.message + "Rating");
+      }
+      console.log(`Row(s) updated: ${this.changes}`);
+    });
+    
+    let averageP = curr.SumP / curr.TotalP;
+    let averageS = curr.SumS / curr.TotalS;
+    console.log("AVERAGE "+ averageP + "   "+ curr.SumP+ "   "+ curr.TotalP + ID)
+    //return {averageP, averageS};
+    var sqledit = 'UPDATE location SET PlaceSafe = ?, SurroundingSafe = ? WHERE ID = ?';
+    db.run(sqledit,  averageP, averageS, ID, function (err) {
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log(`Row(s) updated: ${this.changes}`);
+    });
+    res.writeHead(
+      200,
+      { 'Content-type': 'text/html' }
+    );
+    res.end('post recieved');
+  })
 }
 
 function removeClosed(data) {

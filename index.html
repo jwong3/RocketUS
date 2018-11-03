@@ -52,12 +52,12 @@
         <button id="closeR" value="close" onclick="closeRating()">Close Ratings</button>
         <h3>Add a Rating</h3>
         <div>
-            <label id = "ID" hidden></label>
+            <label id = "IDR" hidden></label>
             <label id = "NameR">Name:</label><br><br>
             <label id ="LocationR">Location:</label><br><br>
             <label id = "DescriptionR">Description:</label><br><br>
             <label>Safety rating of the location</label><br>
-            <select name="PlaceSafeR">
+            <select id="PlaceSafeR">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -65,7 +65,7 @@
                 <option value="5">5</option>
             </select><br><br>
             <label>Safety rating of the surroundings</label><br>
-            <select name="SurroundingSafeR">
+            <select id="SurroundingSafeR">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -74,7 +74,7 @@
             </select><br><br><br>
         </div>
         <div>
-            <button id="updateRating" value="updateRating" onclick="closeEditor()">Update changes</button>
+            <button id="updateRating" value="updateRating" onclick="updateRatings();closeRating()">Update changes</button>
         </div>
     </div>
 </div>
