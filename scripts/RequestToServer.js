@@ -32,8 +32,8 @@ getRequest.onload = function() {
 
 getItemRequest.onload = function() {
     if (this.readyState === 4 && this.status === 200) {
-        populateEditor(JSON.parse(this.responseText));
         openEditEditor();
+        populateEditor(JSON.parse(this.responseText));
     }
 };
 
