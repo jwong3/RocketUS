@@ -1,10 +1,16 @@
-function openEditor() {
+function openEditEditor() {
+    document.getElementById("makeChangesButton").innerHTML = "<button id='editButton' value='update' onclick='updateChangesFromEditor()'>Update changes</button>";
+    document.getElementById("editor").style.width = "500px";
+}
+
+function openAddEditor() {
+    document.getElementById("makeChangesButton").innerHTML = "<button id='addButton' value='update' onclick='closeEditor()'>Add changes</button>";
     document.getElementById("editor").style.width = "500px";
 }
 
 function closeEditor() {
-    document.getElementById("editor").style.width = "0px";
     clearEditor();
+    document.getElementById("editor").style.width = "0px";
 }
 
 function clearEditor() {
@@ -17,6 +23,7 @@ function clearEditor() {
     location.value = "";
     description.value = "";
     isClosed.checked = false;
+    document.getElementById("makeChanges").innerHTML = "";
 }
 
 function populateEditor(JSONObj) {
