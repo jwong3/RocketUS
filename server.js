@@ -8,7 +8,7 @@ var data = [];
 var db = new sqlite3.Database("locations.db")
 
 var server = http.createServer(function (req, res) {
-  var uri = url.parse(req.url)
+  var uri = url.parse(req.url);
 
   switch (uri.pathname) {
     case '/':
@@ -16,6 +16,9 @@ var server = http.createServer(function (req, res) {
       break;
     case '/index.html':
       sendFile(res, 'index.html');
+      break;
+    case '/info.html':
+      sendFile(res, 'info.html');
       break;
     case '/scripts/table.js':
       sendFile(res, 'scripts/table.js', 'text/javascript');
