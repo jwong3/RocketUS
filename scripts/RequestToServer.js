@@ -5,6 +5,7 @@ var addRequest = new XMLHttpRequest();
 var editRequest = new XMLHttpRequest();
 var getRequest = new XMLHttpRequest();
 var getItemRequest = new XMLHttpRequest();
+var getItemRequestR = new XMLHttpRequest();
 
 getData();
 
@@ -37,6 +38,14 @@ getItemRequest.onload = function() {
     }
 };
 
+getItemRequestR.onload = function() {
+    if (this.readyState === 4 && this.status === 200) {
+        console.log(this.responseText)
+        openRating();
+        populateRatings(JSON.parse(this.responseText));
+    }
+};
+
 function addData(JSONObj) {
     addRequest.open("POST", "/addNew");
     addRequest.send(JSON.stringify(JSONObj));
@@ -54,10 +63,13 @@ function getData() {
 }
 
 function getItemInfo(id) {
-    var itemId = {ID: id};
-
     getItemRequest.open("POST", "/getItem");
-    getItemRequest.send(itemId);
+    getItemRequest.send(id);
+}
+
+function getItemInfoRating(id) {
+    getItemRequestR.open("POST", "/getItem");
+    getItemRequestR.send(id);
 }
 
 function displayData(data) {
@@ -69,10 +81,8 @@ function displayData(data) {
     tableToPopulate.innerHTML += columnLabels;
 
     for (i = 0; i < data.length; i++) {
-        dataObj = {Name:data[i].Name, Location:data[i].Location, Description:data[i].Description, ID:data[i].ID}
-        console.log(dataObj)
         template =
-            `<tr id="${data[i].ID}" onclick="getItemInfo('${data[i].ID}')"><td>${data[i].Name}</td><td>${data[i].Location}</td><td>${data[i].Description}</td><td>${data[i].Type}</td><td>${data[i].PlaceSafe}</td><td>${data[i].SurroundingSafe}</td><td><button onclick ="openRating(); populateRatings('${dataObj}')">AddRating</button> </td></tr>`;
+            `<tr id="${data[i].ID}" ondblclick="getItemInfo('${data[i].ID}')"><td>${data[i].Name}</td><td>${data[i].Location}</td><td>${data[i].Description}</td><td>${data[i].Type}</td><td>${data[i].PlaceSafe}</td><td>${data[i].SurroundingSafe}</td><td><button onclick ="getItemInfoRating('${data[i].ID}');">AddRating</button> </td></tr>`;
         tableToPopulate.innerHTML += template;
     }
 }
