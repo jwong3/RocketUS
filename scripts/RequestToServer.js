@@ -42,8 +42,10 @@ function getData() {
 function displayData(data) {
     var i, template;
     var tableToPopulate  = document.getElementById("result");
+    var columnLabels = document.getElementById("labels");
 
     tableToPopulate.innerHTML = "";
+    tableToPopulate.innerHTML += columnLabels;
 
     for (i = 0; i < data.length; i++) {
         template =
