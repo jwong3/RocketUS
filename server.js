@@ -104,7 +104,7 @@ function AddDB(body, res) {
 
 function EditDB(body, res) {
   body = JSON.parse(body);
-  var sqledit = 'UPDATE location SET ID = ?, Name = ?, Description = ?, Location = ?, Type = ?, Closed = ?, PlaceSafe = ?, SurroundingSafe = ? WHERE ID = ?';
+  var sqledit = 'UPDATE location SET ID = ?, Name = ?, Description = ?, Location = ?, Type = ?, Closed = ? WHERE ID = ?';
   //let average = averageRating(body);
   db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, body.PlaceSafe, body.SurroundingSafe, function (err) {
     if (err) {
