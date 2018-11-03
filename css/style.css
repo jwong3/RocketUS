@@ -12,6 +12,11 @@
     padding-left: 30px;
 }
 
+#description {
+    width: 500px;
+    height: 500px;
+}
+
 #placeEditor {
     display: block;
     transition: 0.5s;

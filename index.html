@@ -22,7 +22,9 @@
         <a href="javascript:void(0)" class="closeButton" onclick="closeEditor()">&times</a>
         <h3>Editor</h3>
         <div>
-            <label>Name:</label><input type="text" id="name">
+            <label>Name:</label><br>
+            <input type="text" id="name"><br><br>
+            <label>Type:</label><br>
             <select id="type" name="Type">
                 <option value="N/A">N/A</option>
                 <option value="Bar">Bar</option>
@@ -32,11 +34,13 @@
                 <option value="Retail Store">Retail Store</option>
                 <option value="Other/Entertainment">Other/Entertainment</option>
             </select><br><br>
-            <label>Location:</label><input type="text" id="location">
-            <label>Description:</label><textarea id="description"></textarea>
+            <label>Location:</label><br>
+            <input type="text" id="location"><br><br>
+            <label>Description:</label><br>
+            <textarea id="description" class="description"></textarea><br><br>
         </div>
         <div>
-            <input id="isClosed" type="checkbox" /><label>Closed</label>
+            <input id="isClosed" type="checkbox" /><label>Closed</label><br><br>
         </div>
         <div id="makeChangesButton">
         </div>
