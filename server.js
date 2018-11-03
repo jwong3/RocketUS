@@ -41,13 +41,13 @@ var server = http.createServer(function (req, res) {
         EditDB(body, res);
       });
       break
-    case '/getAll':
+    case '/getData':
       data = [];
       db.each("SELECT ID, Name, Description, Location, Type, Closed, PlaceSafe, SurroundingSafe FROM location", function (err, row) {
         data.push(row);
         console.log(data)
       }, function () {
-        removeClosed(data);
+        data = removeClosed(data);
         res.writeHead(200, { 'Content-type': 'application/json' });
         res.end(JSON.stringify(data));
       });
@@ -129,8 +129,8 @@ function averageRating(body){
 
 function removeClosed(data){
   let tempData = [];
-  for (let i = 0; i <data.length; i++) {
-    if (data[i].Closed == true) {
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].Closed == 0) {
       tempData.push(data[i]);
     }
   }
