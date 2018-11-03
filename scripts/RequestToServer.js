@@ -1,8 +1,11 @@
+
+
 // Get data to update table
 var addRequest = new XMLHttpRequest();
 var editRequest = new XMLHttpRequest();
 var getRequest = new XMLHttpRequest();
 
+getData();
 addRequest.onload = function() {
     if (this.readyState === 4 && this.status === 200) {
         getData();

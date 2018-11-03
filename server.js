@@ -5,20 +5,24 @@ var http = require('http')
   , port = 8080;
 
 var data = [];
-var db = new sqlite3.Database("test.db");
+var db = new sqlite3.Database("locations.db")
 
 var server = http.createServer(function (req, res) {
-  var uri = url.parse(req.url);
+  var uri = url.parse(req.url)
 
   switch (uri.pathname) {
     case '/':
-      sendFile(res, 'index.html');
-      break;
+      sendFile(res, 'index.html')
+      break
     case '/index.html':
-      sendFile(res, 'index.html');
-      break;
-      case '/data':
-        break;
+      sendFile(res, 'index.html')
+      break
+    case '/scripts/table.js':
+      sendFile(res, 'scripts/table.js', 'text/javascript')
+      break
+    case '/scripts/RequestToServer.js':
+      sendFile(res, 'scripts/RequestToServer.js', 'text/javascript')
+      break
     case '/addNew': //sends entire pet data
       var body = '';
       req.on('data', function (data) {
@@ -27,7 +31,7 @@ var server = http.createServer(function (req, res) {
       req.on('end', function () {
         AddDB(body, res);
       });
-      break;
+      break
     case '/edit':
       var body = '';
       req.on('data', function (data) {
@@ -36,32 +40,33 @@ var server = http.createServer(function (req, res) {
       req.on('end', function () {
         EditDB(body, res);
       });
-      break;
-    case '/getAll':
+      break
+    case '/getData':
       data = [];
       db.each("SELECT ID, Name, Description, Location, Type, Closed, PlaceSafe, SurroundingSafe FROM location", function (err, row) {
         data.push(row);
         console.log(data)
       }, function () {
-        removeClosed(data);
+        data = removeClosed(data);
         res.writeHead(200, { 'Content-type': 'application/json' });
         res.end(JSON.stringify(data));
       });
       break;
+    
     default:
-      res.end('404 not found');
+      res.end('404 not found')
   }
-});
+})
 
 server.listen(process.env.PORT || port);
-console.log('listening on 8080');
+console.log('listening on 8080')
 
 // subroutines
 function sendFile(res, filename, contentType) {
   contentType = contentType || 'text/html';
 
   fs.readFile(filename, function (error, content) {
-    res.writeHead(200, { 'Content-type': contentType });
+    res.writeHead(200, { 'Content-type': contentType })
     res.end(content, 'utf-8')
   })
 
@@ -81,7 +86,8 @@ function AddDB(body, res) {
 function EditDB(body, res) {
   body = JSON.parse(body);
   var sqledit = 'UPDATE location SET ID = ?, Name = ?, Description = ?, Location = ?, Type = ?, Closed = ?, PlaceSafe = ?, SurroundingSafe = ? WHERE ID = ?';
-  db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, body.PlaceSafe, body.SurroundingSafe, function (err) {
+  let average = averageRating(body);
+  db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, average.averageP, average.averageS, function (err) {
     if (err) {
       return console.error(err.message);
     }
@@ -94,15 +100,37 @@ function EditDB(body, res) {
   res.end('post recieved');
 }
 
-function averageRating(){
+function averageRating(body){
+  var sqlget = "SELECT * FROM ratings where ID = ? ";
+  var curr;
+  db.run(sqlget, body.ID, function (err, row) {
+    if (err) {
+      return console.error(err.message);
+    }
+    curr = row;
+  });
+  curr.SumP += body.PlaceSafe;
+  curr.TotalP++;
+  curr.SumS += body.SurroundingSafe;
+  curr.TotalS++;
+  var sqleditRating = 'UPDATE ratings SET ID = ?, Name = ?, SumP = ?, TotalP = ?, SumS = ?, TotalS = ?,WHERE ID = ?';
+  db.run(sqleditRating, curr.ID, curr.Name, curr.SumP, curr.TotalP, curr.SumS, curr.TotalS, function (err) {
+    if (err) {
+      return console.error(err.message);
+    }
+  });
+  let averageP = curr.SumP/curr.TotalP;
+  let averageS = curr.SumS/curr.TotalS;
 
+  return averageP, averageS;
+  
 }
 
 
 function removeClosed(data){
   let tempData = [];
-  for (let i = 0; i <data.length; i++) {
-    if (data[i].Closed == true) {
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].Closed == 0) {
       tempData.push(data[i]);
     }
   }
