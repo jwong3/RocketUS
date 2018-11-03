@@ -127,3 +127,9 @@ function updateRatings() {
     let obj = {ID:id, PlaceSafe:placeR, SurroundingSafe:surroundingR}
     editRatingData(obj);
 }
+
+
+function allLocations(object){
+    console.log("Locations " +object[0].PlaceSafe)
+    window.object = object;
+}

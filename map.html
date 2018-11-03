@@ -1,10 +1,12 @@
 <html lang="en">
 
 <head>
-    <title>Home Page</title>
+    <title>Map</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="scripts/Interaction.js"></script>
+    <script src="scripts/RequestToServer.js"></script>
 </head>
 
 <body>
@@ -12,10 +14,8 @@
         <h1>Crack-n-Secure DownTown</h1>
         <h2>Map</h2>
     </div>
-    <div id="mapDisplay" class="mapEditor" onclick="openMapEditor()">
-        <a href="javascript:void(0)" class="closeButton" onclick="minimizeMapEditor()">&times</a>
+    <div id="mapDisplay">
         <div id="locationMapDisplay">
-            <h3>Location Services</h3>
             <input id="pac-input" class="controls" type="text" placeholder="Search Box">
             <div id="map"></div>
         </div>
@@ -28,7 +28,7 @@
 <script>
     // Initialize and add the map
     var map;
-
+    var locations;
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
 
@@ -38,7 +38,7 @@
 
         });
         infoWindow = new google.maps.InfoWindow;
-
+        var geolocation;
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -46,6 +46,7 @@
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
+                geolocation = pos;
 
                 //infoWindow.setPosition(pos);
                 //infoWindow.setContent('Location found.');
@@ -129,6 +130,39 @@
                 console.log("Latitude" + latitude);
             }
         });
+       
+        
+
+        //42.255975, -71.797439
+        var DCU = { lat: 42.255975, lng: -71.797439 };
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+            location: DCU,
+            radius: 1000,
+            type: ['store']
+        }, callback);
+    }
+
+    function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+                createMarker(results[i]);
+            }
+        }
+    }
+
+    function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            infowindow.setContent(place.name);
+            infowindow.open(map, this);
+        });
 
     }
 
@@ -139,7 +173,7 @@
             'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
     }
-
+    
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNISW6YEDPG3v-pTAn1-NQUKnzjZ7IQLA&libraries=places&callback=initMap">
     //key = AIzaSyBNISW6YEDPG3v-pTAn1-NQUKnzjZ7IQLA

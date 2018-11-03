@@ -82,6 +82,16 @@ var server = http.createServer(function (req, res) {
         editRating(body, res);
       });
       break;
+    case '/getLocations':
+    var body = '';
+      req.on('data', function (data) {
+        body += data;
+      });
+      req.on('end', function () {
+        returnLocation(res);
+      });
+      break;
+    
     default:
       res.end('404 not found');
   }
@@ -216,6 +226,20 @@ function returnOneRow(ID, res) {
     }
     res.writeHead(200, { 'Content-type': 'application/json' });
     res.end(JSON.stringify(temp));
+  });
+}
+
+function returnLocation( res) {
+  var curr = [];
+  db.each("SELECT  Location, PlaceSafe FROM location", function (err, row) {
+    if (err) {
+      return console.error(err.message);
+    }
+    curr.push(row);
+  }, function () {
+
+    res.writeHead(200, { 'Content-type': 'application/json' });
+    res.end(JSON.stringify(curr));
   });
 }
 
