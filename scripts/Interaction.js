@@ -8,6 +8,11 @@ function closeEditor() {
 }
 
 function clearEditor() {
+    var name = document.getElementById("name");
+    var location = document.getElementById("location");
+    var description = document.getElementById("description");
+    var isClosed = document.getElementById("isClosed");
+
     name.value = "";
     location.value = "";
     description.value = "";
@@ -15,6 +20,11 @@ function clearEditor() {
 }
 
 function populateEditor(JSONObj) {
+    var name = document.getElementById("name");
+    var location = document.getElementById("location");
+    var description = document.getElementById("description");
+    var isClosed = document.getElementById("isClosed");
+
     name.value = JSONObj.Name;
     location.value = JSONObj.Location;
     description.value = JSONObj.Description;
@@ -22,10 +32,14 @@ function populateEditor(JSONObj) {
     if (JSONObj.Closed === 1) {
         isClosed.checked = true;
     }
-
 }
 
 function updateChangesFromEditor() {
+    var name = document.getElementById("name");
+    var location = document.getElementById("location");
+    var description = document.getElementById("description");
+    var isClosed = document.getElementById("isClosed");
+
     var itemInfo = {};
 
     itemInfo.Name = name.value;
@@ -35,10 +49,11 @@ function updateChangesFromEditor() {
     if (isClosed.checked === true) {
         itemInfo.Closed = 1;
     } else {
-        itemInfo.Closed = 1;
+        itemInfo.Closed = 0;
     }
 
     editData(itemInfo);
+    closeEditor();
 }
 
 function openRating() {

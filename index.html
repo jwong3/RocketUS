@@ -1,83 +1,80 @@
 ﻿<html lang="en">
 
 <head>
-  <title>Home Page</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
-  <script src="scripts/table.js"></script>
-  <script src="scripts/Interaction.js"></script>
-  <script src="scripts/RequestToServer.js"></script>
+    <title>Crack-n-Secure DownTown</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="scripts/table.js"></script>
+    <script src="scripts/Interaction.js"></script>
+    <script src="scripts/RequestToServer.js"></script>
 </head>
 
 <body>
-  <div class="header">
+<div class="header">
     <h1>Crack-n-Secure DownTown</h1>
-  </div>
-
-  <table id="result" style="width:100%">
+</div>
+<table id="result" style="width:100%">
     <tr id="labels">
-      <th onclick="sortTable('0')">Name</th>
-      <th onclick="sortTable('1')">Location</th>
-      <th onclick="sortTable('2')">Description</th>
-      <th onclick="sortTable('3')">Type</th>
-      <th onclick="sortTable('4')">Place Safety</th>
-      <th onclick="sortTable('5')">Location Safety</th>
-      <th>Add a Rating</th>
+        <th onclick="sortTable('0')">Name</th>
+        <th onclick="sortTable('1')">Location</th>
+        <th onclick="sortTable('2')">Description</th>
+        <th onclick="sortTable('3')">Type</th>
+        <th onclick="sortTable('4')">Place Safety</th>
+        <th onclick="sortTable('5')">Location Safety</th>
+        <th>Add a Rating</th>
     </tr>
-  </table>
-  <div id="editor" class="sideEditor">
+</table>
+<div id="editor" class="sideEditor">
     <div id="placeEditor">
-      <h3>Editor</h3>
-      <div>
-        <label>Name:</label><input type="text" id="name">
-        <label>Location:</label><input type="text" id="location">
-        <label>Description:</label><textarea id="description"></textarea>
-      </div>
-      <div>
-        <input id="isClosed" type="checkbox" /><label>Closed</label>
-      </div>
-      <div>
-        <button id="update" value="update" onclick="updateChangesFromEditor(); closeEditor()">Update changes</button>
-      </div>
+        <h3>Editor</h3>
+        <div>
+            <label>Name:</label><input type="text" id="name">
+            <label>Location:</label><input type="text" id="location">
+            <label>Description:</label><textarea id="description"></textarea>
+        </div>
+        <div>
+            <input id="isClosed" type="checkbox" /><label>Closed</label>
+        </div>
+        <div>
+            <button id="makeChanges" value="update" onclick="updateChangesFromEditor()">Update changes</button>
+        </div>
     </div>
-  </div>
+</div>
 
-  <div id="ratings" class="sideEditor">
+<div id="ratings" class="sideEditor">
     <div id="ratingEditor">
-      <button id="close" value="close" onclick="closeRating()">Close Ratings</button>
-      <h3>Add a Rating</h3>
-      <div>
-        <label>Name:</label><br><br>
-        <label>Location:</label><br><br>
-        <label>Description:</label><br><br>
-        <label>Safety rating of the location</label><br>
-        <select name="PlaceSafe">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select><br><br>
-        <label>Safety rating of the surroundings</label><br>
-        <select name="SurroundingSafe">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select><br><br><br>
-      </div>
-      <div>
-        <button id="updateRating" value="updateRating" onclick="closeEditor()">Update changes</button>
-      </div>
+        <button id="close" value="close" onclick="closeRating()">Close Ratings</button>
+        <h3>Add a Rating</h3>
+        <div>
+            <label>Name:</label><br><br>
+            <label>Location:</label><br><br>
+            <label>Description:</label><br><br>
+            <label>Safety rating of the location</label><br>
+            <select name="PlaceSafe">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select><br><br>
+            <label>Safety rating of the surroundings</label><br>
+            <select name="SurroundingSafe">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select><br><br><br>
+        </div>
+        <div>
+            <button id="updateRating" value="updateRating" onclick="closeEditor()">Update changes</button>
+        </div>
     </div>
-  </div>
-
-
-  <div class="footer">
+</div>
+<div class="footer">
     <button onclick="window.open('/info.html', '_self')"> Information</button>
-  </div>
+</div>
 </body>
 
 </html>
