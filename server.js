@@ -135,7 +135,7 @@ function editRating(body, res) {
 }
 
 function averageRating(body) {
-    var sqlget = "SELECT * FROM ratings where ID = ? ";
+    var sqlget = "SELECT * FROM ratings WHERE ID = ? ";
     var curr;
     db.run(sqlget, body.ID, function (err, row) {
         if (err) {
@@ -172,13 +172,15 @@ function removeClosed(data) {
 
 
 function returnOneRow(ID, res) {
+  console.log("ID"+ID)
     ID = JSON.parse(ID);
-    var sqlget = "SELECT * FROM location where ID = ? ";
+    var sqlget = "SELECT * FROM location WHERE ID = ? ";
     var curr;
     db.run(sqlget, ID, function (err, row) {
         if (err) {
             return console.error(err.message);
         }
+        console.log("Row"+row)
         curr = row;
         res.writeHead(200, { 'Content-type': 'application/json' });
         res.end(JSON.stringify(curr));

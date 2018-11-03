@@ -65,4 +65,9 @@ function closeRating() {
 }
 function populateRatings(ID) {
     console.log("Called with ID" + ID)
+    var name = document.getElementById("NameR");
+    var location = document.getElementById("LocationR");
+    var description = document.getElementById("DescriptionR");
+
+
 }
