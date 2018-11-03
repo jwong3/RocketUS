@@ -20,6 +20,9 @@ var server = http.createServer(function (req, res) {
     case '/info.html':
       sendFile(res, 'info.html');
       break;
+    case '/map.html':
+      sendFile(res, 'map.html');
+      break;
     case '/scripts/table.js':
       sendFile(res, 'scripts/table.js', 'text/javascript');
       break;
