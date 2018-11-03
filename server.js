@@ -104,8 +104,24 @@ function AddDB(body, res) {
 function EditDB(body, res) {
   body = JSON.parse(body);
   var sqledit = 'UPDATE location SET ID = ?, Name = ?, Description = ?, Location = ?, Type = ?, Closed = ?, PlaceSafe = ?, SurroundingSafe = ? WHERE ID = ?';
+  //let average = averageRating(body);
+  db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, body.PlaceSafe, body.SurroundingSafe, function (err) {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log(`Row(s) updated: ${this.changes}`);
+  });
+  res.writeHead(
+    200,
+    { 'Content-type': 'text/html' }
+  );
+  res.end('post recieved');
+}
+
+function editRating(body, res) {
+  body = JSON.parse(body);
   let average = averageRating(body);
-  db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, average.averageP, average.averageS, function (err) {
+  db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, average.averageP,  average.averageS, function (err) {
     if (err) {
       return console.error(err.message);
     }
