@@ -67,8 +67,9 @@ function displayData(data) {
     tableToPopulate.innerHTML += columnLabels;
 
     for (i = 0; i < data.length; i++) {
+        dataObj = {Name:data[i].Name, Location:data[i].Location, Description:data[i].Description, ID:data[i].ID}
         template =
-            `<tr id="${data[i].ID}" onclick="getItemInfo('${data[i].ID}')"><td>${data[i].Name}</td><td>${data[i].Location}</td><td>${data[i].Description}</td><td>${data[i].Type}</td><td>${data[i].PlaceSafe}</td><td>${data[i].SurroundingSafe}</td><td><button onclick ="openRating(); populateRatings('${data[i].ID}')">AddRating</button> </td></tr>`;
+            `<tr id="${data[i].ID}" onclick="getItemInfo('${data[i].ID}')"><td>${data[i].Name}</td><td>${data[i].Location}</td><td>${data[i].Description}</td><td>${data[i].Type}</td><td>${data[i].PlaceSafe}</td><td>${data[i].SurroundingSafe}</td><td><button onclick ="openRating(); populateRatings('${dataObj}')">AddRating</button> </td></tr>`;
         tableToPopulate.innerHTML += template;
     }
 }
