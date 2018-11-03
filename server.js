@@ -5,18 +5,20 @@ var http = require('http')
   , port = 8080;
 
 var data = [];
-var db = new sqlite3.Database("test.db")
+var db = new sqlite3.Database("test.db");
 
 var server = http.createServer(function (req, res) {
-  var uri = url.parse(req.url)
+  var uri = url.parse(req.url);
 
   switch (uri.pathname) {
     case '/':
-      sendFile(res, 'index.html')
-      break
+      sendFile(res, 'index.html');
+      break;
     case '/index.html':
-      sendFile(res, 'index.html')
-      break
+      sendFile(res, 'index.html');
+      break;
+      case '/data':
+        break;
     case '/addNew': //sends entire pet data
       var body = '';
       req.on('data', function (data) {
@@ -25,7 +27,7 @@ var server = http.createServer(function (req, res) {
       req.on('end', function () {
         AddDB(body, res);
       });
-      break
+      break;
     case '/edit':
       var body = '';
       req.on('data', function (data) {
@@ -34,7 +36,7 @@ var server = http.createServer(function (req, res) {
       req.on('end', function () {
         EditDB(body, res);
       });
-      break
+      break;
     case '/getAll':
       data = [];
       db.each("SELECT ID, Name, Description, Location, Type, Closed, PlaceSafe, SurroundingSafe FROM location", function (err, row) {
@@ -46,21 +48,20 @@ var server = http.createServer(function (req, res) {
         res.end(JSON.stringify(data));
       });
       break;
-    
     default:
-      res.end('404 not found')
+      res.end('404 not found');
   }
-})
+});
 
 server.listen(process.env.PORT || port);
-console.log('listening on 8080')
+console.log('listening on 8080');
 
 // subroutines
 function sendFile(res, filename, contentType) {
   contentType = contentType || 'text/html';
 
   fs.readFile(filename, function (error, content) {
-    res.writeHead(200, { 'Content-type': contentType })
+    res.writeHead(200, { 'Content-type': contentType });
     res.end(content, 'utf-8')
   })
 
