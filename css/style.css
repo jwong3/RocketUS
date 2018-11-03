@@ -17,6 +17,18 @@
     transition: 0.5s;
 }
 
+.closeButton {
+    color: black;
+    text-decoration: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 40px;
+    padding-top: 30px;
+    padding-left: 30px;
+    font-size: 50px;
+}
+
 #results, td {
     border: 2px solid rgb(34, 32, 32);
     text-align: left;

@@ -11,37 +11,40 @@
 </head>
 
 <body>
-    <div class="header">
-        <h1>Crack-n-Secure DownTown</h1>
+<div class="header">
+    <h1>Crack-n-Secure DownTown</h1>
+</div>
+<div id ="map"> </div>
+<table id="result" style="width:100%">
+</table>
+<button id="add" value="add" onclick="openAddEditor()">ADD</button>
+<div id="editor" class="sideEditor">
+    <div id="placeEditor">
+        <a href="javascript:void(0)" class="closeButton" onclick="closeEditor()">&times</a>
+        <h3>Editor</h3>
+        <div>
+            <label>Name:</label><input type="text" id="name">
+            <select id="type" name="Type">
+                <option value="N/A">N/A</option>
+                <option value="Bar">Bar</option>
+                <option value="Convenience Store">Convenience Store</option>
+                <option value="Grocery Store">Grocery Store</option>
+                <option value="Restaurant">Restaurant</option>
+                <option value="Retail Store">Retail Store</option>
+                <option value="Other/Entertainment">Other/Entertainment</option>
+            </select><br><br>
+            <label>Location:</label><input type="text" id="location">
+            <label>Description:</label><textarea id="description"></textarea>
+        </div>
+        <div>
+            <input id="isClosed" type="checkbox" /><label>Closed</label>
+        </div>
+        <div id="makeChangesButton">
+        </div>
     </div>
     <div id="map"></div>
 
-    <table id="result" style="width:100%">
-    </table>
-    <div id="editor" class="sideEditor">
-        <div id="placeEditor">
-            <h3>Editor</h3>
-            <div>
-                <label>Name:</label><input type="text" id="name">
-                <select id="type" name="Type">
-                    <option value="N/A">N/A</option>
-                    <option value="Bar">Bar</option>
-                    <option value="Convenience Store">Convenience Store</option>
-                    <option value="Grocery Store">Grocery Store</option>
-                    <option value="Restaurant">Restaurant</option>
-                    <option value="Retail Store">Retail Store</option>
-                    <option value="Other/Entertainment">Other/Entertainment</option>
-                </select><br><br>
-                <label>Location:</label><input type="text" id="location">
-                <label>Description:</label><textarea id="description"></textarea>
-            </div>
-            <div>
-                <input id="isClosed" type="checkbox" /><label>Closed</label>
-            </div>
-            <div id="makeChangesButton">
-            </div>
-        </div>
-    </div>
+    
 
     <div id="ratings" class="sideEditor">
         <div id="ratingEditor">
