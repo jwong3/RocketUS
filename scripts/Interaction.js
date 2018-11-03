@@ -1,9 +1,9 @@
 function openMapEditor() {
-    document.getElementById("mapDisplay").style.height = "100%";
+    document.getElementById("mapDisplay").style.width= "100%";
 }
 
 function minimizeMapEditor() {
-    document.getElementById("mapDisplay").style.height = "0";
+    document.getElementById("mapDisplay").style.width = "0px";
 }
 function openEditEditor() {
     clearEditor();
