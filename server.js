@@ -170,7 +170,6 @@ function removeClosed(data) {
     return tempData;
 }
 
-
 function returnOneRow(ID, res) {
   console.log("ID"+ID)
     ID = JSON.parse(ID);
