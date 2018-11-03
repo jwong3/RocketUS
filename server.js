@@ -103,7 +103,9 @@ function AddDB(body, res) {
   //console.log(JSON.parse(body))
   body = JSON.parse(body);
   body.ID = Date.now().toString(36);
-  db.run("INSERT INTO location(ID, Name, Description, Location, Type, Closed, PlaceSafe, SurroundingSafe )  VALUES(?,?,?,?,?,?,?,?)", body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, body.PlaceSafe, body.SurroundingSafe);
+  db.run("INSERT INTO location(ID, Name, Description, Location, Type, Closed, PlaceSafe, SurroundingSafe )  VALUES(?,?,?,?,?,?,?,?)", body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, 0, 0);
+  db.run("INSERT INTO ratings(ID, Name, SumP, TotalP, SumS, TotalS )  VALUES(?,?,?,?,?,?)", body.ID, body.Name, 0, 0,0, 0);
+
   res.writeHead(
     200,
     { 'Content-type': 'text/html' }
@@ -137,17 +139,14 @@ function editRating(body, res) {
 }
 
 function averageRating(body, res) {
-  console.log("Update Rating" + body.ID + body.PlaceSafe)
   var car =[];
   var ID = body.ID;
   db.each("SELECT * FROM ratings", function (err, row) {
     if (err) {
       return console.error(err.message);
     }
-    console.log("Row" + row)
     car.push(row);
   }, function () {
-    console.log("CAR" + car.length)
     let temp;
     for (let i = 0; i < car.length; i++) {
       if (car[i].ID == ID) {
@@ -156,23 +155,19 @@ function averageRating(body, res) {
     }
 
     let curr = temp;
-    console.log("Update " + curr)
     curr.SumP = curr.SumP + parseInt(body.PlaceSafe);
     curr.TotalP++;
     curr.SumS = parseInt(curr.SumS) + parseInt(body.SurroundingSafe);
     curr.TotalS++;
-    console.log(curr.SumS);
     var sqleditRating = 'UPDATE ratings SET SumP = ?, TotalP = ?, SumS = ?, TotalS = ? WHERE ID = ?';
     db.run(sqleditRating,  curr.SumP, curr.TotalP, curr.SumS, curr.TotalS, ID, function (err) {
       if (err) {
         return console.error(err.message + "Rating");
       }
-      console.log(`Row(s) updated: ${this.changes}`);
     });
     
     let averageP = curr.SumP / curr.TotalP;
     let averageS = curr.SumS / curr.TotalS;
-    console.log("AVERAGE "+ averageP + "   "+ curr.SumP+ "   "+ curr.TotalP + ID)
     //return {averageP, averageS};
     var sqledit = 'UPDATE location SET PlaceSafe = ?, SurroundingSafe = ? WHERE ID = ?';
     db.run(sqledit,  averageP, averageS, ID, function (err) {
@@ -200,24 +195,19 @@ function removeClosed(data) {
 }
 
 function returnOneRow(ID, res) {
-  console.log("ID" + ID)
-  //ID = JSON.parse(ID);
   var curr = [];
   db.each("SELECT ID, Name, Description, Location, Type, Closed, PlaceSafe, SurroundingSafe FROM location", function (err, row) {
     if (err) {
       return console.error(err.message);
     }
-    console.log("Row" + row)
     curr.push(row);
   }, function () {
-    console.log(curr.length)
     let temp;
     for (let i = 0; i < curr.length; i++) {
       if (curr[i].ID == ID) {
         temp = curr[i];
       }
     }
-    console.log("CURR" + temp)
     res.writeHead(200, { 'Content-type': 'application/json' });
     res.end(JSON.stringify(temp));
   });

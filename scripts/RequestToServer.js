@@ -49,6 +49,7 @@ getItemRequestR.onload = function () {
         console.log(this.responseText)
         openRating();
         populateRatings(JSON.parse(this.responseText));
+        getData();
     }
 };
 

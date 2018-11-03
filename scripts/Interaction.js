@@ -93,6 +93,8 @@ function openRating() {
 
 function closeRating() {
     document.getElementById("ratings").style.width = "0px";
+    location.reload();
+
 }
 function populateRatings(JSONObj) {
     console.log("RATINGS " + JSONObj + JSONObj.Name)
