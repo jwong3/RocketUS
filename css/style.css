@@ -21,14 +21,13 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 1;
     bottom: 0;
     background-color: #F1FEC6;
-    overflow: hidden;
+    overflow-x: hidden;
     transition: 0.5s;
     padding-top: 30px;
     padding-right: 30px;
-    border: 0;
 }
 
 #locationMapDisplay {
