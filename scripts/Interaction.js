@@ -1,5 +1,5 @@
 function openMapEditor() {
-    document.getElementById("mapDisplay").style.height = "500px";
+    document.getElementById("mapDisplay").style.width = "500px";
 }
 
 function minimizeMapEditor() {
