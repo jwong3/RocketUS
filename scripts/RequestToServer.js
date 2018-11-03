@@ -47,7 +47,7 @@ getItemRequest.onload = function () {
 
 getItemRequestR.onload = function () {
     if (this.readyState === 4 && this.status === 200) {
-        console.log(this.responseText)
+        console.log("Rating" + this.responseText)
         openRating();
         populateRatings(JSON.parse(this.responseText));
         getData();

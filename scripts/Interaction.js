@@ -1,12 +1,12 @@
 function openEditEditor() {
     clearEditor();
-    document.getElementById("makeChangesButton").innerHTML = "<button id='editButton' value='update' onclick='updateChangesFromEditor(0)'>Update changes</button>";
+    document.getElementById("makeChangesButton").innerHTML = "<a class='button6' id='editButton' value='update' onclick='updateChangesFromEditor(0)'>Update changes</a>";
     document.getElementById("editor").style.width = "500px";
 }
 
 function openAddEditor() {
     clearEditor();
-    document.getElementById("makeChangesButton").innerHTML = "<button id='addButton' value='update' onclick='updateChangesFromEditor(1)'>Add changes</button>";
+    document.getElementById("makeChangesButton").innerHTML = "<a class='button6' id='addButton' value='update' onclick='updateChangesFromEditor(1)'>Add changes</a>";
     document.getElementById("editor").style.width = "500px";
 }
 
