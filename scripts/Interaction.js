@@ -2,8 +2,8 @@ function openMapEditor() {
     document.getElementById("mapDisplay").style.height = "100%";
 }
 
-function closeMapEditor() {
-    document.getElementById("mapDisplay").style.height = "0%";
+function minimizeMapEditor() {
+    document.getElementById("mapDisplay").style.height = "0";
 }
 function openEditEditor() {
     clearEditor();
