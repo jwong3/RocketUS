@@ -102,7 +102,6 @@ function AddDB(body, res) {
 }
 
 function EditDB(body, res) {
-<<<<<<< HEAD
   body = JSON.parse(body);
   var sqledit = 'UPDATE location SET ID = ?, Name = ?, Description = ?, Location = ?, Type = ?, Closed = ?, PlaceSafe = ?, SurroundingSafe = ? WHERE ID = ?';
   //let average = averageRating(body);
@@ -133,22 +132,6 @@ function editRating(body, res) {
     { 'Content-type': 'text/html' }
   );
   res.end('post recieved');
-=======
-    body = JSON.parse(body);
-    var sqledit = 'UPDATE location SET ID = ?, Name = ?, Description = ?, Location = ?, Type = ?, Closed = ?, PlaceSafe = ?, SurroundingSafe = ? WHERE ID = ?';
-    let average = averageRating(body);
-    db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, average.averageP, average.averageS, function (err) {
-        if (err) {
-            return console.error(err.message);
-        }
-        console.log(`Row(s) updated: ${this.changes}`);
-    });
-    res.writeHead(
-        200,
-        { 'Content-type': 'text/html' }
-    );
-    res.end('post recieved');
->>>>>>> 47cbbcf6aaa5b714b1f7b7b82343e696cbd72db3
 }
 
 function averageRating(body) {
@@ -188,7 +171,7 @@ function removeClosed(data) {
 }
 
 
-function returnOneRow(ID) {
+function returnOneRow(ID, res) {
     ID = JSON.parse(ID);
     var sqlget = "SELECT * FROM location where ID = ? ";
     var curr;
