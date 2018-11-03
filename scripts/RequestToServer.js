@@ -3,25 +3,31 @@
 // Get data to update table
 var addRequest = new XMLHttpRequest();
 var editRequest = new XMLHttpRequest();
+var editRatingRequest = new XMLHttpRequest();
 var getRequest = new XMLHttpRequest();
 var getItemRequest = new XMLHttpRequest();
 var getItemRequestR = new XMLHttpRequest();
 
 getData();
 
-addRequest.onload = function() {
+addRequest.onload = function () {
     if (this.readyState === 4 && this.status === 200) {
         getData();
     }
 };
 
-editRequest.onload = function() {
+editRequest.onload = function () {
     if (this.readyState === 4 && this.status === 200) {
         getData();
     }
 };
+editRatingRequest.onload = function () {
+    if (this.readyState === 4 && this.status === 200) {
+        console.log("Updated rating ")
+    }
+};
 
-getRequest.onload = function() {
+getRequest.onload = function () {
     if (this.readyState === 4 && this.status === 200) {
         var data = JSON.parse(this.responseText);
         if (data.length > 0) {
@@ -31,14 +37,14 @@ getRequest.onload = function() {
     }
 };
 
-getItemRequest.onload = function() {
+getItemRequest.onload = function () {
     if (this.readyState === 4 && this.status === 200) {
         openEditEditor();
         populateEditor(JSON.parse(this.responseText));
     }
 };
 
-getItemRequestR.onload = function() {
+getItemRequestR.onload = function () {
     if (this.readyState === 4 && this.status === 200) {
         console.log(this.responseText)
         openRating();
@@ -55,6 +61,12 @@ function editData(JSONObj) {
     editRequest.open("POST", "/edit");
     editRequest.send(JSON.stringify(JSONObj));
 }
+
+function editRatingData(JSONObj) {
+    editRatingRequest.open("POST", "/editRating");
+    editRatingRequest.send(JSON.stringify(JSONObj));
+}
+
 
 function getData() {
     console.log("getdata")

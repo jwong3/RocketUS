@@ -86,6 +86,7 @@ function updateChangesFromEditor(action) {
     closeEditor();
 }
 
+//RATINGS
 function openRating() {
     document.getElementById("ratings").style.width = "500px";
 }
@@ -94,13 +95,25 @@ function closeRating() {
     document.getElementById("ratings").style.width = "0px";
 }
 function populateRatings(JSONObj) {
-    console.log("RATINGS " +JSONObj  + JSONObj.Name)
+    console.log("RATINGS " + JSONObj + JSONObj.Name)
     var name = document.getElementById("NameR");
     var location = document.getElementById("LocationR");
     var description = document.getElementById("DescriptionR");
+    var id = document.getElementById("IDR");
 
-    name.innerHTML+=JSONObj.Name;
-    location.innerHTML +=JSONObj.Location;
+    name.innerHTML += JSONObj.Name;
+    location.innerHTML += JSONObj.Location;
     description.innerHTML += JSONObj.Description;
+    id.innerText = JSONObj.ID;
+}
 
+function updateRatings() {
+    var id = document.getElementById("IDR").innerText;
+    var PlaceSafeR = document.getElementById("PlaceSafeR");
+    var SurroundingSafeR = document.getElementById("SurroundingSafeR");
+    var placeR = PlaceSafeR.options[PlaceSafeR.selectedIndex].value;
+    var surroundingR = SurroundingSafeR.options[SurroundingSafeR.selectedIndex].value;
+    console.log(placeR + surroundingR + "RATINGS")
+    let obj = {ID:id, PlaceSafe:placeR, SurroundingSafe:surroundingR}
+    editRatingData(obj);
 }
