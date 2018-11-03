@@ -26,7 +26,10 @@ var server = http.createServer(function (req, res) {
     case '/scripts/RequestToServer.js':
       sendFile(res, 'scripts/RequestToServer.js', 'text/javascript');
       break;
-      case '/style.css':
+      case '/scripts/Interaction.js':
+          sendFile(res, 'scripts/Interaction.js', 'text/javascript');
+          break;
+      case '/css/style.css':
         sendFile(res, 'css/style.css', 'text/css');
         break;
     case '/addNew': //sends entire pet data
