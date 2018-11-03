@@ -24,7 +24,7 @@ getRequest.onload = function() {
     if (this.readyState === 4 && this.status === 200) {
         var data = JSON.parse(this.responseText);
         if (data.length > 0) {
-            console.log("Here")
+            console.log("Here");
             displayData(data);
         }
     }
@@ -33,9 +33,9 @@ getRequest.onload = function() {
 getItemRequest.onload = function() {
     if (this.readyState === 4 && this.status === 200) {
         populateEditor(JSON.parse(this.responseText));
-        openEditor();
+        openEditEditor();
     }
-}
+};
 
 function addData(JSONObj) {
     addRequest.open("POST", "/addNew");
@@ -54,8 +54,10 @@ function getData() {
 }
 
 function getItemInfo(id) {
+    var itemId = {ID: id};
+
     getItemRequest.open("POST", "/getItem");
-    getItemRequest.send(id);
+    getItemRequest.send(itemId);
 }
 
 function displayData(data) {

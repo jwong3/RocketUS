@@ -25,6 +25,7 @@
         <th>Add a Rating</th>
     </tr>
 </table>
+<button id="add" value="add" onclick="openAddEditor()">ADD</button>
 <div id="editor" class="sideEditor">
     <div id="placeEditor">
         <h3>Editor</h3>
@@ -36,8 +37,7 @@
         <div>
             <input id="isClosed" type="checkbox" /><label>Closed</label>
         </div>
-        <div>
-            <button id="makeChanges" value="update" onclick="updateChangesFromEditor()">Update changes</button>
+        <div id="makeChangesButton">
         </div>
     </div>
 </div>

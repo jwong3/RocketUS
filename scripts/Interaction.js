@@ -1,10 +1,16 @@
-function openEditor() {
+function openEditEditor() {
+    document.getElementById("makeChangesButton").innerHTML = "<button id='editButton' value='update' onclick='updateChangesFromEditor()'>Update changes</button>";
+    document.getElementById("editor").style.width = "500px";
+}
+
+function openAddEditor() {
+    document.getElementById("makeChangesButton").innerHTML = "<button id='addButton' value='update' onclick='closeEditor()'>Add changes</button>";
     document.getElementById("editor").style.width = "500px";
 }
 
 function closeEditor() {
-    document.getElementById("editor").style.width = "0px";
     clearEditor();
+    document.getElementById("editor").style.width = "0px";
 }
 
 function clearEditor() {
@@ -17,6 +23,7 @@ function clearEditor() {
     location.value = "";
     description.value = "";
     isClosed.checked = false;
+    document.getElementById("makeChanges").innerHTML = "";
 }
 
 function populateEditor(JSONObj) {
@@ -24,17 +31,19 @@ function populateEditor(JSONObj) {
     var location = document.getElementById("location");
     var description = document.getElementById("description");
     var isClosed = document.getElementById("isClosed");
+    var toBeEdited = document.getElementById("editButton");
 
     name.value = JSONObj.Name;
     location.value = JSONObj.Location;
     description.value = JSONObj.Description;
+    toBeEdited.id = JSONObj.ID;
 
     if (JSONObj.Closed === 1) {
         isClosed.checked = true;
     }
 }
 
-function updateChangesFromEditor() {
+function updateChangesFromEditor(action) {
     var name = document.getElementById("name");
     var location = document.getElementById("location");
     var description = document.getElementById("description");
@@ -52,7 +61,17 @@ function updateChangesFromEditor() {
         itemInfo.Closed = 0;
     }
 
-    editData(itemInfo);
+    if (action === 'add') {
+        addData(itemInfo);
+    }
+
+    if (action === 'edit') {
+        var toBeEdited = document.getElementById("editButton");
+
+        itemInfo.ID = toBeEdited.id;
+        editData(itemInfo);
+    }
+
     closeEditor();
 }
 
