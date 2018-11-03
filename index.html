@@ -4,6 +4,9 @@
   <title>Home Page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="scripts/table.js"></script>
+  <script src="scripts/RequestToServer.js"></script>
+
 
 </head>
 
@@ -12,12 +15,12 @@
     <h1>Crack-n-Secure DownTown</h1>
     <table id="result" style="width:100%">
       <tr id="labels">
-        <th>Name</th>
-        <th>Location</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Place Safety</th>
-        <th>Location Safety</th>
+        <th onclick="sortTable('0')">Name</th>
+        <th onclick="sortTable('1')">Location</th>
+        <th onclick="sortTable('2')">Description</th>
+        <th onclick="sortTable('3')">Type</th>
+        <th onclick="sortTable('4')">Place Safety</th>
+        <th onclick="sortTable('5')">Location Safety</th>
       </tr>
     </table>
   </div>
