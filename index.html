@@ -74,8 +74,10 @@
             </div>
         </div>
     </div>
-    <div id="mapDisplay" class="mapEditor">
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="mapDisplay" class="mapEditor" onclick="openMapEditor()">
+            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+
+        <a href="javascript:void(0)" class="closeButton" onclick="minimizeMapEditor()">&times</a>
         <div id="locationMapDisplay">
             <h3>Location Services</h3>
             <div id="map"></div>
@@ -89,8 +91,6 @@
 </body>
 <script>
     // Initialize and add the map
-    openMapEditor();
-
     var map;
 
     function initMap() {
