@@ -41,6 +41,7 @@ var server = http.createServer(function (req, res) {
         data.push(row);
         console.log(data)
       }, function () {
+        removeClosed(data);
         res.writeHead(200, { 'Content-type': 'application/json' });
         res.end(JSON.stringify(data));
       });
@@ -97,3 +98,12 @@ function averageRating(){
 }
 
 
+function removeClosed(data){
+  let tempData = [];
+  for (let i = 0; i <data.length; i++) {
+    if (data[i].Closed == true) {
+      tempData.push(data[i]);
+    }
+  }
+  return tempData;
+}
