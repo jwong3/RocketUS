@@ -36,7 +36,7 @@ function populateEditor(JSONObj) {
     name.value = JSONObj.Name;
     location.value = JSONObj.Location;
     description.value = JSONObj.Description;
-    toBeEdited.id = JSONObj.ID;
+    toBeEdited.value = JSONObj.ID;
 
     if (JSONObj.Closed === 1) {
         isClosed.checked = true;
@@ -68,7 +68,7 @@ function updateChangesFromEditor(action) {
     if (action === 'edit') {
         var toBeEdited = document.getElementById("editButton");
 
-        itemInfo.ID = toBeEdited.id;
+        itemInfo.ID = toBeEdited.value;
         editData(itemInfo);
     }
 
