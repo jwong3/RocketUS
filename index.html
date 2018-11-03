@@ -14,6 +14,7 @@
   <div class="header">
     <h1>Crack-n-Secure DownTown</h1>
   </div>
+
   <table id="result" style="width:100%">
     <tr id="labels">
       <th onclick="sortTable('0')">Name</th>
@@ -27,7 +28,6 @@
   </table>
   <div id="editor" class="sideEditor">
     <div id="placeEditor">
-      <button id="close" value="close" onclick="closeEditor()">Close Editor</button>
       <h3>Editor</h3>
       <div>
         <label>Name:</label><input type="text" id="name">
@@ -35,13 +35,14 @@
         <label>Description:</label><textarea id="description"></textarea>
       </div>
       <div>
-        <input id="close" type="checkbox" /><label>Closed</label>
+        <input id="isClosed" type="checkbox" /><label>Closed</label>
       </div>
       <div>
-        <button id="update" value="update" onclick="closeEditor()">Update changes</button>
+        <button id="update" value="update" onclick="updateChangesFromEditor(); closeEditor()">Update changes</button>
       </div>
     </div>
   </div>
+
   <div id="ratings" class="sideEditor">
     <div id="ratingEditor">
       <button id="close" value="close" onclick="closeRating()">Close Ratings</button>
@@ -78,8 +79,5 @@
     <button onclick="window.open('/info.html', '_self')"> Information</button>
   </div>
 </body>
-<script>
-  getData();
-</script>
 
 </html>

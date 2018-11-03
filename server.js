@@ -9,7 +9,6 @@ var db = new sqlite3.Database("locations.db")
 
 var server = http.createServer(function (req, res) {
   var uri = url.parse(req.url);
-
   switch (uri.pathname) {
     case '/':
       sendFile(res, 'index.html');
@@ -70,21 +69,20 @@ var server = http.createServer(function (req, res) {
         returnOneRow(body, res);
       });
       break;
-
     default:
       res.end('404 not found')
   }
 })
 
 server.listen(process.env.PORT || port);
-console.log('listening on 8080')
+console.log('listening on 8080');
 
 // subroutines
 function sendFile(res, filename, contentType) {
   contentType = contentType || 'text/html';
 
   fs.readFile(filename, function (error, content) {
-    res.writeHead(200, { 'Content-type': contentType })
+    res.writeHead(200, { 'Content-type': contentType });
     res.end(content, 'utf-8')
   })
 
@@ -121,7 +119,7 @@ function EditDB(body, res) {
 function editRating(body, res) {
   body = JSON.parse(body);
   let average = averageRating(body);
-  db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, average.averageP,  average.averageS, function (err) {
+  db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, average.averageP, average.averageS, function (err) {
     if (err) {
       return console.error(err.message);
     }

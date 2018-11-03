@@ -4,8 +4,10 @@
 var addRequest = new XMLHttpRequest();
 var editRequest = new XMLHttpRequest();
 var getRequest = new XMLHttpRequest();
+var getItemRequest = new XMLHttpRequest();
 
 getData();
+
 addRequest.onload = function() {
     if (this.readyState === 4 && this.status === 200) {
         getData();
@@ -28,6 +30,13 @@ getRequest.onload = function() {
     }
 };
 
+getItemRequest.onload = function() {
+    if (this.readyState === 4 && this.status === 200) {
+        populateEditor(JSON.parse(this.responseText));
+        openEditor();
+    }
+}
+
 function addData(JSONObj) {
     addRequest.open("POST", "/addNew");
     addRequest.send(JSON.stringify(JSONObj));
@@ -39,8 +48,14 @@ function editData(JSONObj) {
 }
 
 function getData() {
+    console.log("getdata")
     getRequest.open("GET", "/getData");
     getRequest.send();
+}
+
+function getItemInfo(id) {
+    getItemRequest.open("POST", "/getItem");
+    getItemRequest.send(id);
 }
 
 function displayData(data) {
@@ -53,7 +68,7 @@ function displayData(data) {
 
     for (i = 0; i < data.length; i++) {
         template =
-            `<tr id="${data[i].ID}" ondblclick="openEditor()"><td>${data[i].Name}</td><td>${data[i].Location}</td><td>${data[i].Description}</td><td>${data[i].Type}</td><td>${data[i].PlaceSafe}</td><td>${data[i].SurroundingSafe}</td><td><button onclick ="openRating(); populateRatings('${data[i].ID}')">AddRating</button> </td></tr>`;
+            `<tr id="${data[i].ID}" onclick="getItemInfo('${data[i].ID}')"><td>${data[i].Name}</td><td>${data[i].Location}</td><td>${data[i].Description}</td><td>${data[i].Type}</td><td>${data[i].PlaceSafe}</td><td>${data[i].SurroundingSafe}</td><td><button onclick ="openRating(); populateRatings('${data[i].ID}')">AddRating</button> </td></tr>`;
         tableToPopulate.innerHTML += template;
     }
 }
