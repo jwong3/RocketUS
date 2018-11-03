@@ -16,14 +16,19 @@
   }
 
 .mapEditor {
-    height: 0;
-    width: 100%;
+    height: 100%;
+    width: 0;
     position: fixed;
+    top: 0;
+    left: 0;
     z-index: 10;
     bottom: 0;
     background-color: #F1FEC6;
+    overflow: hidden;
     transition: 0.5s;
     padding-top: 30px;
+    padding-right: 30px;
+    border: 0;
 }
 
 #locationMapDisplay {

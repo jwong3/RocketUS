@@ -6,6 +6,7 @@ function minimizeMapEditor() {
     console.log("minimize")
     document.getElementById("mapDisplay").style.width = "10px";
 }
+
 function openEditEditor() {
     clearEditor();
     document.getElementById("makeChangesButton").innerHTML = "<a class='button6' id='editButton' value='update' onclick='updateChangesFromEditor(0)'>Update changes</a>";
