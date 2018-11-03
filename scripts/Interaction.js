@@ -1,11 +1,11 @@
 function openMapEditor() {
-    document.getElementById("mapDisplay").style.width = "100%";
+    document.getElementById("mapDisplay").style.width  = "80%";
 }
 
 function minimizeMapEditor() {
-    document.getElementById("mapDisplay").style.width = "0%";
+    console.log("minimize")
+    document.getElementById("mapDisplay").style.zIndex= -2;
 }
-
 function openEditEditor() {
     clearEditor();
     document.getElementById("makeChangesButton").innerHTML = "<a class='button6' id='editButton' value='update' onclick='updateChangesFromEditor(0)'>Update changes</a>";
