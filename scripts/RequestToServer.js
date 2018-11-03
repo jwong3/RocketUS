@@ -74,11 +74,11 @@ function getItemInfoRating(id) {
 
 function displayData(data) {
     var i, template;
-    var tableToPopulate  = document.getElementById("result");
-    var columnLabels = document.getElementById("labels").innerHTML;
+    var tableToPopulate = document.getElementById("result");
 
     tableToPopulate.innerHTML = "";
-    tableToPopulate.innerHTML += columnLabels;
+    tableToPopulate.innerHTML +=
+        "<tr id='labels'><th onclick='sortTable(0)'>Name</th><th onclick='sortTable(1)'>Location</th> <th onclick='sortTable(2)'>Description</th> <th onclick='sortTable(3)'>Type</th> <th onclick='sortTable(4)'>Place Safety</th> <th onclick='sortTable(5)'>Location Safety</th><th>Add a Rating</th></tr>";
 
     for (i = 0; i < data.length; i++) {
         template =
