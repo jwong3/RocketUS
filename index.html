@@ -14,6 +14,7 @@
 <div class="header">
     <h1>Crack-n-Secure DownTown</h1>
 </div>
+<div id ="map"> </div>
 <table id="result" style="width:100%">
 </table>
 <button id="add" value="add" onclick="openAddEditor()">ADD</button>
@@ -45,42 +46,60 @@
         <div id="makeChangesButton">
         </div>
     </div>
-</div>
+    <div id="map"></div>
 
-<div id="ratings" class="sideEditor">
-    <div id="ratingEditor">
-        <button id="closeR" value="close" onclick="closeRating()">Close Ratings</button>
-        <h3>Add a Rating</h3>
-        <div>
-            <label id = "IDR" hidden></label>
-            <label id = "NameR">Name:</label><br><br>
-            <label id ="LocationR">Location:</label><br><br>
-            <label id = "DescriptionR">Description:</label><br><br>
-            <label>Safety rating of the location</label><br>
-            <select id="PlaceSafeR">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select><br><br>
-            <label>Safety rating of the surroundings</label><br>
-            <select id="SurroundingSafeR">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select><br><br><br>
-        </div>
-        <div>
-            <button id="updateRating" value="updateRating" onclick="updateRatings();closeRating()">Update changes</button>
+    
+
+    <div id="ratings" class="sideEditor">
+        <div id="ratingEditor">
+            <button id="closeR" value="close" onclick="closeRating()">Close Ratings</button>
+            <h3>Add a Rating</h3>
+            <div>
+                <label id="IDR" hidden></label>
+                <label id="NameR">Name:</label><br><br>
+                <label id="LocationR">Location:</label><br><br>
+                <label id="DescriptionR">Description:</label><br><br>
+                <label>Safety rating of the location</label><br>
+                <select id="PlaceSafeR">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select><br><br>
+                <label>Safety rating of the surroundings</label><br>
+                <select id="SurroundingSafeR">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select><br><br><br>
+            </div>
+            <div>
+                <button id="updateRating" value="updateRating" onclick="updateRatings();closeRating()">Update changes</button>
+            </div>
         </div>
     </div>
-</div>
-<div class="footer">
-    <button onclick="window.open('/info.html', '_self')"> Information</button>
-</div>
+    <div class="footer">
+        <a class ="button6" id="add" value="add" onclick="openAddEditor()">ADD</a>
+        <a class="button6" onclick="window.open('/info.html', '_self')"> Information</a>
+    </div>
 </body>
-
+<script>
+        // Initialize and add the map
+        function initMap() {
+          // The location of Uluru
+          var uluru = {lat: -25.344, lng: 131.036};
+          // The map, centered at Uluru
+          var map = new google.maps.Map(
+              document.getElementById('map'), {zoom: 4, center: uluru});
+          // The marker, positioned at Uluru
+          var marker = new google.maps.Marker({position: uluru, map: map});
+        }
+        initMap();
+            </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNISW6YEDPG3v-pTAn1-NQUKnzjZ7IQLA&callback=initMap">
+    </script>
 </html>

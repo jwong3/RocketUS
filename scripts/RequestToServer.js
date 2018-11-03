@@ -96,7 +96,7 @@ function displayData(data) {
 
     for (i = 0; i < data.length; i++) {
         template =
-            `<tr id="${data[i].ID}" ondblclick="getItemInfo('${data[i].ID}')"><td>${data[i].Name}</td><td>${data[i].Location}</td><td>${data[i].Description}</td><td>${data[i].Type}</td><td>${data[i].PlaceSafe}</td><td>${data[i].SurroundingSafe}</td><td><button onclick ="getItemInfoRating('${data[i].ID}');">AddRating</button> </td></tr>`;
+            `<tr id="${data[i].ID}" ondblclick="getItemInfo('${data[i].ID}')"><td>${data[i].Name}</td><td>${data[i].Location}</td><td>${data[i].Description}</td><td>${data[i].Type}</td><td>${data[i].PlaceSafe}</td><td>${data[i].SurroundingSafe}</td><td><a class ="button5" onclick ="getItemInfoRating('${data[i].ID}');">AddRating</a> </td></tr>`;
         tableToPopulate.innerHTML += template;
     }
 
