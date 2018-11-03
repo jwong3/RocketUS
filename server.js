@@ -26,12 +26,12 @@ var server = http.createServer(function (req, res) {
     case '/scripts/RequestToServer.js':
       sendFile(res, 'scripts/RequestToServer.js', 'text/javascript');
       break;
-      case '/scripts/Interaction.js':
-          sendFile(res, 'scripts/Interaction.js', 'text/javascript');
-          break;
-      case '/css/style.css':
-        sendFile(res, 'css/style.css', 'text/css');
-        break;
+    case '/scripts/Interaction.js':
+      sendFile(res, 'scripts/Interaction.js', 'text/javascript');
+      break;
+    case '/css/style.css':
+      sendFile(res, 'css/style.css', 'text/css');
+      break;
     case '/addNew': //sends entire pet data
       var body = '';
       req.on('data', function (data) {
@@ -61,7 +61,16 @@ var server = http.createServer(function (req, res) {
         res.end(JSON.stringify(data));
       });
       break;
-    default:
+    case '/getItem':
+      var body = '';
+      req.on('data', function (data) {
+        body += data;
+      });
+      req.on('end', function () {
+        returnOneRow(body, res);
+      });
+      break;
+      default:
       res.end('404 not found')
   }
 })
@@ -108,7 +117,7 @@ function EditDB(body, res) {
   res.end('post recieved');
 }
 
-function averageRating(body){
+function averageRating(body) {
   var sqlget = "SELECT * FROM ratings where ID = ? ";
   var curr;
   db.run(sqlget, body.ID, function (err, row) {
@@ -127,15 +136,14 @@ function averageRating(body){
       return console.error(err.message);
     }
   });
-  let averageP = curr.SumP/curr.TotalP;
-  let averageS = curr.SumS/curr.TotalS;
+  let averageP = curr.SumP / curr.TotalP;
+  let averageS = curr.SumS / curr.TotalS;
 
   return averageP, averageS;
-  
+
 }
 
-
-function removeClosed(data){
+function removeClosed(data) {
   let tempData = [];
   for (let i = 0; i < data.length; i++) {
     if (data[i].Closed == 0) {
@@ -143,4 +151,19 @@ function removeClosed(data){
     }
   }
   return tempData;
+}
+
+
+function returnOneRow(ID) {
+  ID = JSON.parse(ID);
+  var sqlget = "SELECT * FROM location where ID = ? ";
+  var curr;
+  db.run(sqlget, ID, function (err, row) {
+    if (err) {
+      return console.error(err.message);
+    }
+    curr = row;
+    res.writeHead(200, { 'Content-type': 'application/json' });
+    res.end(JSON.stringify(curr));
+  });
 }

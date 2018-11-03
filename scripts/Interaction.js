@@ -1,7 +1,7 @@
 var name = document.getElementById("name");
 var location = document.getElementById("location");
 var description = document.getElementById("description");
-var isClosed = document.getElementById("close");
+var isClosed = document.getElementById("isClosed");
 
 function openEditor() {
     document.getElementById("editor").style.width = "500px";
@@ -44,4 +44,12 @@ function updateChangesFromEditor() {
     }
 
     editData(itemInfo);
+}
+
+function openRating() {
+    document.getElementById("ratings").style.width = "500px";
+}
+
+function closeRating() {
+    document.getElementById("ratings").style.width = "0px";
 }
