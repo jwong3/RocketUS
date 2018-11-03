@@ -75,12 +75,12 @@
         </div>
     </div>
     <div id="mapDisplay" class="mapEditor">
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
         <div id="locationMapDisplay">
             <h3>Location Services</h3>
             <div id="map"></div>
         </div>
     </div>
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 
     <div class="footer">
         <a class="button6" id="add" value="add" onclick="openAddEditor()">ADD</a>
@@ -89,7 +89,6 @@
 </body>
 <script>
     // Initialize and add the map
-    initMap();
     openMapEditor();
 
     var map;
@@ -182,6 +181,19 @@
             map.fitBounds(bounds);
         });
 
+
+        var geocoder = new google.maps.Geocoder();
+        var address = "1 Kelley Square, Worcester, MA 01610	";
+
+        geocoder.geocode({ 'address': address }, function (results, status) {
+
+            if (status == google.maps.GeocoderStatus.OK) {
+                var latitude = results[0].geometry.location.lat();
+                var longitude = results[0].geometry.location.lng();
+                console.log("Latitude" + latitude);
+            }
+        });
+
     }
 
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -191,9 +203,13 @@
             'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
     }
+
+
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNISW6YEDPG3v-pTAn1-NQUKnzjZ7IQLA&libraries=places&callback=initMap">
 //key = AIzaSyBNISW6YEDPG3v-pTAn1-NQUKnzjZ7IQLA
 </script>
+
+
 
 </html>
