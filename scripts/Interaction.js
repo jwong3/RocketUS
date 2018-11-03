@@ -22,7 +22,7 @@ function clearEditor() {
     var isClosed = document.getElementById("isClosed");
 
     name.value = "";
-    type.value = "n/a";
+    type.value = "N/A";
     location.value = "";
     description.value = "";
     isClosed.checked = false;
