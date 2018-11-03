@@ -102,6 +102,7 @@ function sendFile(res, filename, contentType) {
 function AddDB(body, res) {
   //console.log(JSON.parse(body))
   body = JSON.parse(body);
+  body.ID = Date.now().toString(36);
   db.run("INSERT INTO location(ID, Name, Description, Location, Type, Closed, PlaceSafe, SurroundingSafe )  VALUES(?,?,?,?,?,?,?,?)", body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, body.PlaceSafe, body.SurroundingSafe);
   res.writeHead(
     200,
