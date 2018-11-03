@@ -24,7 +24,7 @@ var server = http.createServer(function (req, res) {
       sendFile(res, 'scripts/RequestToServer.js', 'text/javascript');
       break;
       case '/style.css':
-        sendFile(res, 'style.css', 'text/css');
+        sendFile(res, 'css/style.css', 'text/css');
         break;
     case '/addNew': //sends entire pet data
       var body = '';

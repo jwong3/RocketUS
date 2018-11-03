@@ -22,6 +22,7 @@ getRequest.onload = function() {
     if (this.readyState === 4 && this.status === 200) {
         var data = JSON.parse(this.responseText);
         if (data.length > 0) {
+            console.log("Here")
             displayData(data);
         }
     }
@@ -45,15 +46,15 @@ function getData() {
 function displayData(data) {
     var i, template;
     var tableToPopulate  = document.getElementById("result");
-    var columnLabels = document.getElementById("labels");
+    var columnLabels = document.getElementById("labels").innerHTML;
 
     tableToPopulate.innerHTML = "";
     tableToPopulate.innerHTML += columnLabels;
 
     for (i = 0; i < data.length; i++) {
         template =
-            `<tr id="${data[i].id}" onclick="openEditor()"><td>${data[i].name}"</td><td>${data[i].location}"</td><td>${data[i].description}"</td><td>${data[i].type}"</td><td>${data[i].placeSafety}"</td><td>${data[i].locationSafety}"</td></tr>"`;
-        tableToPopulate += template;
+            `<tr id="${data[i].ID}"><td>${data[i].Name}</td><td>${data[i].Location}</td><td>${data[i].Description}</td><td>${data[i].Type}</td><td>${data[i].PlaceSafe}</td><td>${data[i].SurroundingSafe}</td></tr>`;
+        tableToPopulate.innerHTML += template;
     }
 }
 
