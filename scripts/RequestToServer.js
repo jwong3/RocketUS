@@ -7,6 +7,7 @@ var editRatingRequest = new XMLHttpRequest();
 var getRequest = new XMLHttpRequest();
 var getItemRequest = new XMLHttpRequest();
 var getItemRequestR = new XMLHttpRequest();
+var getLocations = new XMLHttpRequest();
 
 getData();
 
@@ -44,6 +45,13 @@ getItemRequest.onload = function () {
         populateEditor(JSON.parse(this.responseText));
     }
 };
+
+getLocations.onload = function () {
+    if (this.readyState === 4 && this.status === 200) {
+        allLocations(JSON.parse(this.responseText));
+    }
+};
+
 
 getItemRequestR.onload = function () {
     if (this.readyState === 4 && this.status === 200) {
@@ -84,6 +92,11 @@ function getItemInfo(id) {
 function getItemInfoRating(id) {
     getItemRequestR.open("POST", "/getItem");
     getItemRequestR.send(id);
+}
+
+function getLocationsA() {
+    getLocations.open("POST", "/getLocations");
+    getLocations.send("send");
 }
 
 function displayData(data) {
