@@ -70,3 +70,6 @@ function openRating() {
 function closeRating() {
     document.getElementById("ratings").style.width = "0px";
 }
+function populateRatings(ID) {
+    console.log("Called with ID" + ID)
+}

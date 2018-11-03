@@ -48,6 +48,7 @@ function editData(JSONObj) {
 }
 
 function getData() {
+    console.log("getdata")
     getRequest.open("GET", "/getData");
     getRequest.send();
 }
@@ -69,7 +70,7 @@ function displayData(data) {
 
     for (i = 0; i < data.length; i++) {
         template =
-            `<tr id="${data[i].ID}" onclick="getItemInfo('${data[i].ID}')"><td>${data[i].Name}</td><td>${data[i].Location}</td><td>${data[i].Description}</td><td>${data[i].Type}</td><td>${data[i].PlaceSafe}</td><td>${data[i].SurroundingSafe}</td></tr>`;
+            `<tr id="${data[i].ID}" onclick="getItemInfo('${data[i].ID}')"><td>${data[i].Name}</td><td>${data[i].Location}</td><td>${data[i].Description}</td><td>${data[i].Type}</td><td>${data[i].PlaceSafe}</td><td>${data[i].SurroundingSafe}</td><td><button onclick ="openRating(); populateRatings('${data[i].ID}')">AddRating</button> </td></tr>`;
         tableToPopulate.innerHTML += template;
     }
 }

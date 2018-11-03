@@ -102,20 +102,36 @@ function AddDB(body, res) {
 }
 
 function EditDB(body, res) {
-    body = JSON.parse(body);
-    var sqledit = 'UPDATE location SET ID = ?, Name = ?, Description = ?, Location = ?, Type = ?, Closed = ?, PlaceSafe = ?, SurroundingSafe = ? WHERE ID = ?';
-    let average = averageRating(body);
-    db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, average.averageP, average.averageS, function (err) {
-        if (err) {
-            return console.error(err.message);
-        }
-        console.log(`Row(s) updated: ${this.changes}`);
-    });
-    res.writeHead(
-        200,
-        { 'Content-type': 'text/html' }
-    );
-    res.end('post recieved');
+  body = JSON.parse(body);
+  var sqledit = 'UPDATE location SET ID = ?, Name = ?, Description = ?, Location = ?, Type = ?, Closed = ?, PlaceSafe = ?, SurroundingSafe = ? WHERE ID = ?';
+  //let average = averageRating(body);
+  db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, body.PlaceSafe, body.SurroundingSafe, function (err) {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log(`Row(s) updated: ${this.changes}`);
+  });
+  res.writeHead(
+    200,
+    { 'Content-type': 'text/html' }
+  );
+  res.end('post recieved');
+}
+
+function editRating(body, res) {
+  body = JSON.parse(body);
+  let average = averageRating(body);
+  db.run(sqledit, body.ID, body.Name, body.Description, body.Location, body.Type, body.Closed, average.averageP, average.averageS, function (err) {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log(`Row(s) updated: ${this.changes}`);
+  });
+  res.writeHead(
+    200,
+    { 'Content-type': 'text/html' }
+  );
+  res.end('post recieved');
 }
 
 function averageRating(body) {
@@ -155,7 +171,7 @@ function removeClosed(data) {
 }
 
 
-function returnOneRow(ID) {
+function returnOneRow(ID, res) {
     ID = JSON.parse(ID);
     var sqlget = "SELECT * FROM location where ID = ? ";
     var curr;
