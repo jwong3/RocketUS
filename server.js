@@ -168,6 +168,9 @@ function averageRating(body, res) {
     
     let averageP = curr.SumP / curr.TotalP;
     let averageS = curr.SumS / curr.TotalS;
+    averageP = round(averageP, 2);
+    averageS = round(averageS, 2);
+
     //return {averageP, averageS};
     var sqledit = 'UPDATE location SET PlaceSafe = ?, SurroundingSafe = ? WHERE ID = ?';
     db.run(sqledit,  averageP, averageS, ID, function (err) {
@@ -211,4 +214,8 @@ function returnOneRow(ID, res) {
     res.writeHead(200, { 'Content-type': 'application/json' });
     res.end(JSON.stringify(temp));
   });
+}
+
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
