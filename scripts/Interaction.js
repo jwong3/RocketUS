@@ -9,3 +9,11 @@ function closeEditor() {
 function populateEditor() {
 
 }
+
+function openRating() {
+    document.getElementById("ratings").style.width = "500px";
+}
+
+function closeRating() {
+    document.getElementById("ratings").style.width = "0px";
+}

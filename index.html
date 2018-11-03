@@ -16,40 +16,68 @@
   </div>
   <table id="result" style="width:100%">
     <tr id="labels">
-      <th align="left" onclick="sortTable('0')">Name</th>
+      <th onclick="sortTable('0')">Name</th>
       <th onclick="sortTable('1')">Location</th>
       <th onclick="sortTable('2')">Description</th>
       <th onclick="sortTable('3')">Type</th>
       <th onclick="sortTable('4')">Place Safety</th>
       <th onclick="sortTable('5')">Location Safety</th>
+      <th>Add a Rating</th>
     </tr>
   </table>
-    <div id="editor" class="sideEditor">
-        <div id="placeEditor">
-            <h3>Editor</h3>
-            <div>
-                <label>Name:</label><input type="text" id="name">
-                <label>Location:</label><input type="text" id="location">
-                <label>Description:</label><textarea id="description"></textarea>
-            </div>
-            <div>
-                <input id="close" type="checkbox" /><label>Closed</label>
-            </div>
-            <div>
-                <button id="update" value="update" onclick="closeEditor()">Update changes</button>
-            </div>
-        </div>
+  <div id="editor" class="sideEditor">
+    <div id="placeEditor">
+      <h3>Editor</h3>
+      <div>
+        <label>Name:</label><input type="text" id="name">
+        <label>Location:</label><input type="text" id="location">
+        <label>Description:</label><textarea id="description"></textarea>
+      </div>
+      <div>
+        <input id="close" type="checkbox" /><label>Closed</label>
+      </div>
+      <div>
+        <button id="update" value="update" onclick="closeEditor()">Update changes</button>
+      </div>
     </div>
-</div>
+  </div>
+  <div id="ratings" class="sideEditor">
+    <div id="ratingEditor">
+      <h3>Add a Rating</h3>
+      <div>
+        <label>Name:</label>
+        <label>Location:</label>
+        <label>Description:</label>
+        <label>Saftey rating of the location</label>
+        <select name="PlaceSafe">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <label>Saftey rating of the location</label>
+        <select name="SurroundingSafe">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <div>
+        <button id="updateRating" value="updateRating" onclick="closeEditor()">Update changes</button>
+      </div>
+    </div>
+  </div>
 
 
-  
   <div class="footer">
     <button onclick="window.open('/info.html', '_self')"> Information</button>
   </div>
 </body>
 <script>
-    getData();
+  getData();
 </script>
 
 </html>
