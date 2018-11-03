@@ -82,6 +82,13 @@ function openRating() {
 function closeRating() {
     document.getElementById("ratings").style.width = "0px";
 }
-function populateRatings(ID) {
-    console.log("Called with ID" + ID)
+function populateRatings(JSONObj) {
+    var name = document.getElementById("NameR");
+    var location = document.getElementById("LocationR");
+    var description = document.getElementById("DescriptionR");
+
+    name.innerHTML+=JSONObj.Name;
+    location.innerHTML +=JSONObj.Location;
+    description.innerHTML += JSONObj.Description;
+
 }
