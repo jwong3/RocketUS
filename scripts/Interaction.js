@@ -1,19 +1,21 @@
 function openMapEditor() {
-    document.getElementById("mapDisplay").style.width= "100%";
+    document.getElementById("mapDisplay").style.height = "500px";
 }
 
 function minimizeMapEditor() {
-    document.getElementById("mapDisplay").style.width = "0px";
+    console.log("minimize")
+    document.getElementById("mapDisplay").style.width = "10px";
 }
+
 function openEditEditor() {
     clearEditor();
-    document.getElementById("makeChangesButton").innerHTML = "<button id='editButton' value='update' onclick='updateChangesFromEditor(0)'>Update changes</button>";
+    document.getElementById("makeChangesButton").innerHTML = "<a class='button6' id='editButton' value='update' onclick='updateChangesFromEditor(0)'>Update changes</a>";
     document.getElementById("editor").style.width = "500px";
 }
 
 function openAddEditor() {
     clearEditor();
-    document.getElementById("makeChangesButton").innerHTML = "<button id='addButton' value='update' onclick='updateChangesFromEditor(1)'>Add changes</button>";
+    document.getElementById("makeChangesButton").innerHTML = "<a class='button6' id='addButton' value='update' onclick='updateChangesFromEditor(1)'>Add changes</a>";
     document.getElementById("editor").style.width = "500px";
 }
 
