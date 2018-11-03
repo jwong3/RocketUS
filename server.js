@@ -9,10 +9,10 @@ var server = http.createServer(function (req, res) {
 
   switch (uri.pathname) {
     case '/':
-      sendFile(res, 'public/index.html')
+      sendFile(res, 'index.html')
       break
     case '/index.html':
-      sendFile(res, 'public/index.html')
+      sendFile(res, 'index.html')
       break
     
     default:
