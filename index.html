@@ -24,18 +24,32 @@
       <th onclick="sortTable('5')">Location Safety</th>
     </tr>
   </table>
+    <div id="editor" class="sideEditor">
+        <div id="placeEditor">
+            <h3>Editor</h3>
+            <div>
+                <label>Name:</label><input type="text" id="name">
+                <label>Location:</label><input type="text" id="location">
+                <label>Description:</label><textarea id="description"></textarea>
+            </div>
+            <div>
+                <input id="close" type="checkbox" /><label>Closed</label>
+            </div>
+            <div>
+                <button id="update" value="update" onclick="closeEditor()">Update changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-  <br>
-  <br>
+  
   <div class="footer">
     <button onclick="window.open('/info.html', '_self')"> Information</button>
   </div>
 </body>
 <script>
-  var panel = document.getElementById("thepanel");
-  panel.openPopup();
-  getData();
+    getData();
 </script>
 
 </html>

@@ -1,3 +1,22 @@
+.sideEditor {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: lightgreen;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+#placeEditor {
+    display: block;
+    transition: 0.5s;
+}
+
 #results, td {
     border: 2px solid rgb(34, 32, 32);
     text-align: left;
