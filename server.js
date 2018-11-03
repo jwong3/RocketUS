@@ -12,17 +12,20 @@ var server = http.createServer(function (req, res) {
 
   switch (uri.pathname) {
     case '/':
-      sendFile(res, 'index.html')
-      break
+      sendFile(res, 'index.html');
+      break;
     case '/index.html':
-      sendFile(res, 'index.html')
-      break
+      sendFile(res, 'index.html');
+      break;
     case '/scripts/table.js':
-      sendFile(res, 'scripts/table.js', 'text/javascript')
-      break
+      sendFile(res, 'scripts/table.js', 'text/javascript');
+      break;
     case '/scripts/RequestToServer.js':
-      sendFile(res, 'scripts/RequestToServer.js', 'text/javascript')
-      break
+      sendFile(res, 'scripts/RequestToServer.js', 'text/javascript');
+      break;
+      case '/style.css':
+        sendFile(res, 'style.css', 'text/css');
+        break;
     case '/addNew': //sends entire pet data
       var body = '';
       req.on('data', function (data) {

@@ -52,7 +52,7 @@ function displayData(data) {
 
     for (i = 0; i < data.length; i++) {
         template =
-            `<tr id="${data[i].id}"><td>${data[i].name}"</td><td>${data[i].location}"</td><td>${data[i].description}"</td><td>${data[i].type}"</td><td>${data[i].placeSafety}"</td><td>${data[i].locationSafety}"</td></tr>"`;
+            `<tr id="${data[i].id}" onclick="openEditor()"><td>${data[i].name}"</td><td>${data[i].location}"</td><td>${data[i].description}"</td><td>${data[i].type}"</td><td>${data[i].placeSafety}"</td><td>${data[i].locationSafety}"</td></tr>"`;
         tableToPopulate += template;
     }
 }
