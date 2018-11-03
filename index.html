@@ -74,7 +74,13 @@
             </div>
         </div>
     </div>
-    <div id="map"> </div>
+
+    <div id="mapDisplay" class="mapEditor">
+        <div id="locationMapDisplay">
+            <h3>Location Services</h3>
+            <div id="map"></div>
+        </div>
+    </div>
 
     <div class="footer">
         <a class="button6" id="add" value="add" onclick="openAddEditor()">ADD</a>
@@ -83,7 +89,11 @@
 </body>
 <script>
     // Initialize and add the map
+    initMap();
+    openMapEditor();
+
     var map;
+
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: -34.397, lng: 150.644 },

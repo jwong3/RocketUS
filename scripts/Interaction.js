@@ -1,3 +1,10 @@
+function openMapEditor() {
+    document.getElementById("mapDisplay").style.height = "100%";
+}
+
+function closeMapEditor() {
+    document.getElementById("mapDisplay").style.height = "0%";
+}
 function openEditEditor() {
     clearEditor();
     document.getElementById("makeChangesButton").innerHTML = "<button id='editButton' value='update' onclick='updateChangesFromEditor(0)'>Update changes</button>";

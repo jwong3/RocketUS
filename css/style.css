@@ -5,11 +5,25 @@
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: F1FEC6;
+    background-color: #F1FEC6;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 30px;
     padding-left: 30px;
+}
+
+.mapEditor {
+    height: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    background-color: #F1FEC6;
+    transition: 0.5s;
+}
+
+#locationMapDisplay {
+    display: block;
+    transition: 0.5s;
 }
 
 #description {
